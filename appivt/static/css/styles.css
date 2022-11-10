@@ -1,0 +1,90 @@
+html, body {
+	font-family: 'Arial';
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+}
+a {
+	color: #0059b2;
+	text-decoration: none;
+}
+a:hover {
+	color: #CC0000;
+	text-decoration: underline;
+}
+
+ul.mainmenu {
+	list-style: none;
+	background: #3F4137;
+	height: 60px;
+	margin: 0;
+	padding: 0;
+	color: #fdc073;
+	font-size: 20px;
+	overflow: hidden;
+}
+ul.mainmenu li {
+	float: left;
+	margin: 18px 40px 0 50px;
+}
+ul.mainmenu li.last {float: right;}
+
+ul.mainmenu li a {
+	color: #fdc073;
+	text-decoration: none;
+}
+ul.mainmenu li a:hover {
+	color: #FDA83D;
+}
+
+.test li{
+list-style-type: circle;
+    font-size:24px;
+    color: #3F4137;
+    font-family: 'Roboto';
+}
+
+.test b{
+color:#0059b2;
+font-size:32px;
+}
+
+div.content {
+	margin: 30px;
+}
+.shlyapkin h1{
+margin-left:50px;
+color:#3F4137;
+font-family: 'MS Roboto';
+}
+.clear {clear: both;}
+
+
+
+.form-contact label {
+	display: inline-block;
+	min-width: 80px;
+}
+.form-contact p {margin: 20px 10 20px 0; margin-left:20px}
+.form-contact input[type=submit], textarea {
+	font-size: 16px;
+}
+
+.form-contact label {
+	display: inline-block;
+	min-width: 80px;
+}
+.form-contact p {margin: 10px 0 10px 0;}
+.form-contact input[type=submit], textarea {
+	font-size: 16px;
+}
+.flash {padding:10px;}
+.flash.success{
+border: 2px solid #21DB56;
+background: #AEFFC5;
+}
+.flash.error {
+border: 5px solid #FF4343;
+background: #FF9C9C;
+}
