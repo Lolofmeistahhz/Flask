@@ -1,12 +1,35 @@
+import datetime
+
 from appivt import app
-from flask import render_template, request, flash, get_flashed_messages, session, redirect, url_for, abort
+from flask import render_template, request, flash, get_flashed_messages, session, redirect, url_for, abort, g
 
-menu = [{'name': 'Главная', 'url': 'index'}, {'name': 'Блюда', 'url': 'dishes'}, {'name': 'Помощь', 'url': 'help'},
-        {'name': 'Контакт', 'url': 'contact'}, {'name': 'Авторизация', 'url': 'login'},{'name':'Регистрация','url':'reg'}]
+from appivt.bd_exe import connect_db, FDataBase
 
-bd_contact = []
+menu = [{'title': 'Главная', 'url': 'index'}, {'title': 'Блюда', 'url': 'dishes'}, {'title': 'Помощь', 'url': 'help'},
+        {'title': 'Контакт', 'url': 'contact'}, {'title': 'Авторизация', 'url': 'login'},{'title':'Регистрация','url':'reg'}]
 
-bd_userdata=[{'username':'test','psw':'test'}]
+
+app.permanent_session_lifetime = datetime.timedelta(seconds=20)
+
+def get_db():
+    if not hasattr(g,'link_db'):
+        g.link_db = connect_db()
+    return g.link_db
+
+
+@app.teardown_appcontext
+def close_db(error):
+    if hasattr(g,'link_db'):
+        g.link_db.close()
+
+
+@app.route('/index_db')
+def index_db():
+    db = get_db()
+    db = FDataBase(db)
+    return render_template('index_db.html',title = 'Index_db', menu=db.getMenu())
+
+
 
 @app.route('/index')
 def index():
@@ -68,21 +91,25 @@ def contact():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
+    db = get_db()
+    db = FDataBase(db)
     if 'userlogged' in session:
         return redirect(url_for('profile', username=session['userlogged']))
     elif request.method == 'POST':
-        for item in bd_userdata:
-            if item['username'] == request.form['username'] and item['psw'] == request.form['psw']:
+        for item in db.getUser():
+            if item['username'] == request.form['username'] and item['password'] == request.form['psw']:
                 session['userlogged'] = request.form['username']
                 return redirect(url_for('profile', username=session['userlogged']))
         else:
             pass
-    return render_template('login.html', title='Авторизация', menu=menu, data=bd_userdata)
+    return render_template('login.html', title='Авторизация', menu=menu, data=db.getUser())
 
 @app.route('/reg', methods=['POST', 'GET'])
 def reg():
+    db = get_db()
+    db = FDataBase(db)
     if request.method == "POST":
-        rec_reg(bd_userdata, request.form)
+        db.add_users(request.form['username'],request.form['psw'])
     return  render_template('reg.html', title='Регистрация', menu=menu)
 
 @app.route('/profile/<username>')
@@ -94,6 +121,9 @@ def profile(username):
 @app.errorhandler(404)
 def page_not_found(error):
     return render_template('page404.html', title='Все сломалось', menu=menu)
+
 @app.errorhandler(401)
 def page_error_401(error):
     return render_template('page401.html', title='Ошибка авторизации', menu=menu)
+
+
