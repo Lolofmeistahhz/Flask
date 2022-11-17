@@ -27,7 +27,7 @@ def close_db(error):
 def index_db():
     db = get_db()
     db = FDataBase(db)
-    return render_template('index_db.html',title = 'Index_db', menu=db.getMenu())
+    return render_template('index_db.html',title = 'Index_db', menu=db.getMenu(),post=db.getPosts())
 
 
 

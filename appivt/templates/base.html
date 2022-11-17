@@ -20,13 +20,13 @@
                     {% endfor -%}
                 </ul>
             {% endblock mainmenu -%}
-<!--            {%-  block posts -%}-->
-<!--                <ul class="mainmenu">-->
-<!--                    {% for m in post -%}-->
-<!--                    <li>  <a href="{{m['post_message']}}"> {{m['title']}} </a> </li>-->
-<!--                    {% endfor -%}-->
-<!--                </ul>-->
-<!--            {% endblock posts -%}-->
+            {%-  block posts -%}
+                <ul class="posts">
+                    {% for n in post -%}
+                    <li>{{n['title']}} {{n['post_message']}}   </li>
+                    {% endfor -%}
+                </ul>
+            {% endblock posts -%}
 {% endblock -%}
 </body>
 </html>

@@ -8,7 +8,7 @@ menu = [{'name': 'Главная', 'url': 'index'}, {'name': 'Блюда', 'url'
 
 bd_userdata=[{'username':'test','psw':'test'},{'username':'root','psw':'pass'},{'username':'log','psw':'psw'}]
 
-posts=[{'title':'test','post_message':'test'},{'title':'test2','post_message':'test2'},{'title':'test3','post_message':'test3'}]
+posts=[{'title':'test','post_message':'test'},{'title':'Что то о постах','post_message':'пост'},{'title':'Чек пост','post_message':'Чеееек'}]
 
 def connect_db():
     '''создание соединения с бд'''
