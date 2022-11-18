@@ -5,10 +5,12 @@ html, body {
 	height: 100%;
 	width: 100%;
 }
+
 a {
 	color: #0059b2;
 	text-decoration: none;
 }
+
 a:hover {
 	color: #CC0000;
 	text-decoration: underline;
@@ -60,12 +62,19 @@ font-family: 'MS Roboto';
 }
 .clear {clear: both;}
 
+.form-contact-post{
+margin-left:40%;
+}
 
+.form-contact-post textarea{
+width:220px;
+};
 
 .form-contact label {
 	display: inline-block;
 	min-width: 80px;
 }
+
 .form-contact p {margin: 20px 10 20px 0; margin-left:20px}
 .form-contact input[type=submit], textarea {
 	font-size: 16px;

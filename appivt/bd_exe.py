@@ -3,8 +3,10 @@ from appivt import app
 
 
 
-menu = [{'name': 'Главная', 'url': 'index'}, {'name': 'Блюда', 'url': 'dishes'}, {'name': 'Помощь', 'url': 'help'},
-        {'name': 'Контакт', 'url': 'contact'}, {'name': 'Авторизация', 'url': 'login'},{'name':'Регистрация','url':'reg'}]
+# menu = [{'name': 'Главная', 'url': 'index'}, {'name': 'Блюда', 'url': 'dishes'}, {'name': 'Помощь', 'url': 'help'},
+#         {'name': 'Контакт', 'url': 'contact'}, {'name': 'Авторизация', 'url': 'login'},{'name':'Регистрация','url':'../reg'},{'name':'Главная БД','url':'/db/index_db'}]
+
+menu = [{'name':'Главная БД','url':'index_db'},{'name':'Посты','url':'posts_db'}]
 
 bd_userdata=[{'username':'test','psw':'test'},{'username':'root','psw':'pass'},{'username':'log','psw':'psw'}]
 
@@ -105,3 +107,4 @@ if __name__ == "__main__":
         print(db.add_menu(i['name'], i['url']))
     for i in posts:
         print(db.add_post(i['title'], i['post_message']))
+

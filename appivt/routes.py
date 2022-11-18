@@ -8,6 +8,8 @@ from appivt.bd_exe import connect_db, FDataBase
 menu = [{'title': 'Главная', 'url': 'index'}, {'title': 'Блюда', 'url': 'dishes'}, {'title': 'Помощь', 'url': 'help'},
         {'title': 'Контакт', 'url': 'contact'}, {'title': 'Авторизация', 'url': 'login'},{'title':'Регистрация','url':'reg'}]
 
+bd_contact = []
+
 
 app.permanent_session_lifetime = datetime.timedelta(seconds=20)
 
@@ -23,12 +25,27 @@ def close_db(error):
         g.link_db.close()
 
 
-@app.route('/index_db')
+@app.route('/db/index_db')
 def index_db():
     db = get_db()
     db = FDataBase(db)
-    return render_template('index_db.html',title = 'Index_db', menu=db.getMenu(),post=db.getPosts())
+    return render_template('index_db.html',title = 'Index_db', menu=db.getMenu())
 
+
+@app.route('/db/posts_db',methods=['POST','GET'])
+def posts_db():
+    db = get_db()
+    db = FDataBase(db)
+    if request.method == 'POST':
+        if len(request.form['title']) > 4 and len(request.form['post_message']) > 10:
+            res = db.add_post(request.form['title'],request.form['post_message'])
+            if not res:
+                flash('Ошибка добавления статьи',category='error')
+            else:
+                flash('Статья добавлена',category='succes')
+        else:
+            flash('Ошибка добавления статьи', category='error')
+    return render_template('posts_db.html',title = 'Добавление статей', menu=db.getMenu(),post=db.getPosts())
 
 
 @app.route('/index')
